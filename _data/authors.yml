@@ -3,8 +3,8 @@
 # You can change `author1` to your shortname.
 author1:
   # Replace <...> with your own (remove the < >)
-  name:              <firstname> <lastname>
-  email:             <mail@domain.tld>
+  name:              Inuk Song
+  email:             Psyence221b@gmail.com
 
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
@@ -26,12 +26,12 @@ author1:
   # Social media icons in sidebar.
   # Comment/uncommet to show/hide. Rearrange to change the order in which they appear.
   social:
-    twitter:         jekyllrb
-    github:          qwtel/hydejack
+    # twitter:         jekyllrb
+    github:          psyence221b
     # download:        <url>
-    # email:           <mail@domain.tld>
+    email:           psyence221b@gmail.com
     # rss:             https://<url>/feed.xml
-    # facebook:        <username>
+    facebook:        songiu1@naver.com
     # google:          <number>
     # vk:              <username>
     # youtube:         <string_string_string>
