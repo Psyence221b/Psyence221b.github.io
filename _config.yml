@@ -212,6 +212,20 @@ collections:
     permalink:         /projects/:path/
     output:            true
 
+# Archives
+# ========================================================================================
+
+jekyll-archives:
+  enabled:
+    - year
+    - month
+    - tags
+  layout: 'archive'
+  permalinks:
+    year:     '/archives/:year/'
+    month:    '/archives/:year/:month/'
+    tag:      '/archives/tag/:name/'
+    category: '/archives/category/:name/'
 
 # File inclusion/exclusion
 # ========================================================================================
@@ -236,6 +250,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-titles-from-headings
+  - jekyll-archives
 
 # Theme
 # ---------------------------------------------------------------------------------------
