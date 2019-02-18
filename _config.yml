@@ -112,6 +112,15 @@ defaults:
       seo:
         type:          WebPage
 
+# add archive of category and tag
+collections:
+  featured_categories:
+    permalink:          /:name/
+    output:             true
+  featured_tags:
+    permalink:          /tag-:name/
+    output:             true
+
 
 # 3rd Party Integrations
 # ----------------------------------------------------------------------------------------
