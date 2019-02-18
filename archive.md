@@ -1,5 +1,6 @@
 ---
 # Test for archive page
+layout : list
 
 # The title of the page.
 title: Archive
