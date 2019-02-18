@@ -1,7 +1,7 @@
 ---
 layout: list
 title: Archive
-slug: [test]
+slug: test
 menu: true
 order: 10 
 ---
