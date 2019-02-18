@@ -10,7 +10,7 @@ menu: true
 order: 10
 ---
 
-# Archiving by tag
+# Tag
 
 {% for tag in site.iterable.tags %}
 <h3>{{ tag.name }}</h3>
@@ -23,7 +23,7 @@ order: 10
 {% endfor %}
 
 
-# Archiving by data
+# Date
 
 {% for post in site.posts %}
 	{% capture month %}{{ post.date | date: '%m%Y' }}{% endcapture %}
