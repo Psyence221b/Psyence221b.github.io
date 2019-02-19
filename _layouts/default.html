@@ -23,6 +23,14 @@ layout: base
   <header>
     <h1 class="page-title">{{ page.title | default:strings.home | default:"Home" }}</h1>
     {% include components/message.html text=page.description hide=page.hide_description %}
+    <span class="post-tags">
+      [&nbsp;
+      {% for tag in page.tags %}
+        {% capture tag_name %}{{ tag }}{% endcapture %}
+        <a class="no-underline" href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>    
+      {% endfor %}
+      ]
+    </span>
   </header>
 
   {{ content }}
