@@ -13,10 +13,10 @@ description: >
   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 # You can show the description on the page by deleting this line:
-hide_description: true
+hide_description: false
 
 # TODO
-image: /assets/img/blog/hydejack-8.png
+# image: /assets/img/blog/hydejack-8.png
 
 # Setting `menu` will generate an entry in the sidebar.
 menu: true
