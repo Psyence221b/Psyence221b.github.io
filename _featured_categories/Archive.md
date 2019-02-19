@@ -9,8 +9,8 @@ title: Archive
 slug: []
 
 # (Optional) Write a short (~150 characters) description of this featured tag.
-description: >
-  All posts in this blog
+# description: >
+#  All posts in this blog
 
 # Setting `menu` will generate an entry in the sidebar for this tag.
 menu: true
