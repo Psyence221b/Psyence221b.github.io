@@ -15,5 +15,3 @@ slug: []
 menu: true
 order: 10
 ---
-
-{% include tagcloud.html %}
