@@ -10,6 +10,13 @@
         {{ post.title }}
       {% unless no_link_title %}</a>{% endunless %}
     </h1>
+    <span>[
+      {% for tag in page.tags %}
+        {% capture tag_name %}{{ tag }}{% endcapture %}
+        <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
+      {% endfor %}
+      ]
+    </span>
 
     <p class="post-date heading">
       {% assign post_format = site.data.strings.date_formats.post | default:"%d %b %Y" %}
