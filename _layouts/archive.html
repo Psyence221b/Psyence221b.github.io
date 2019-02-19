@@ -1,8 +1,6 @@
 ---
 layout: base
 ---
-{% include tagcloud.html %}
-
 {% assign posts = site.categories[page.slug] | default:site.tags[page.slug] | default:site.posts %}
 
 {% if page.title.size > 0 %}
@@ -12,6 +10,8 @@ layout: base
   </header>
   <hr class="sr-only"/>
 {% endif %}
+
+{% include tagcloud.html %}
 
 {{ content }}
 
