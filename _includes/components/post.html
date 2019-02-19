@@ -22,12 +22,11 @@
       <!--{% include components/tag-list.html tags=post.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}-->
       <br>
       <span class="post-tags">
-        [&nbsp;
+        &nbsp;
         {% for tag in page.tags %}
           {% capture tag_name %}{{ tag }}{% endcapture %}
           <a class="no-underline" href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>    
         {% endfor %}
-        ]
       </span>
     </p>
     
