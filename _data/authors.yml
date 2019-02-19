@@ -19,9 +19,9 @@ author1:
   picture:
      path:            /assets/img/me.jpeg
     # srcset is optional, but can be used to provide higher res versions for retina displays
-    # srcset:
-    #  1x:            https://placehold.it/128x128
-    #  2x:            https://placehold.it/256x256
+     srcset:
+      1x:             /assets/img/me1x.jpg
+      2x:             /assets/img/me2x.jpg
 
   # Social media icons in sidebar.
   # Comment/uncommet to show/hide. Rearrange to change the order in which they appear.
