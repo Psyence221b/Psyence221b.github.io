@@ -37,8 +37,12 @@ layout: base
   <header>
     <h1 class="page-title">{{ page.title }}</h1>
     {% include components/message.html text=page.description hide=page.hide_description %}
-    <link rel="import" href="https://psyence221b.github.io/online-cv/index.html">
+    <script src="/lib/w3.js"></script>
   </header>
+    <div w3-include-html="content.html"></div>
 
+    <script>
+    w3.includeHTML();
+    </script>
   {{ content }}
 </article>
