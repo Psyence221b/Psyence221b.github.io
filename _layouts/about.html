@@ -42,6 +42,7 @@ layout: base
   {{ content }}
 </article>
 
+<!--
   <head>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
@@ -52,14 +53,26 @@ layout: base
     });
     </script>
   </head>
+-->
+
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <style>
+      .iframe_00 {
+         display: block;
+         border: none;
+         height: 100vh;
+         width: 100vw;
+      }
+      </style>
+   </head>
 
   <body>
-    <!--
-    <iframe src="https://psyence221b.github.io/online-cv/index.html"
-            width="100%" height="100%" frameborder="0" scrolling="no" marginwidth="0" marginheight="0">
+   
+    <iframe src="https://psyence221b.github.io/online-cv/index.html" class="iframe_00">
     </iframe>
-    -->
+   <!--
     <div id="remotecontents">
     </div>
-
+   -->
 </body>
