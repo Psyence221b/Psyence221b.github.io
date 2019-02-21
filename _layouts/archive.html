@@ -13,8 +13,13 @@ layout: base
 {% endif %}
 
 <!-- Tag cloud -->
+{% capture temptags %}
+  {% for tag in site.tags %}
+    {{ tag[1].size | plus: 1000 }}#{{ tag[0] }}#{{ tag[1].size }}
+  {% endfor %}
+{% endcapture %}
 
-{% include components/tag-list-sub.html tags=site.tags[1] meta=site.featured_tags start_with=tag_start separator=tag_separator %}
+{% include components/tag-list-sub.html tags=tag meta=site.featured_tags start_with=tag_start separator=tag_separator %}
 <!-- Tag cloud -->
 
 {{ content }}
