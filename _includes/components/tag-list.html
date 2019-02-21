@@ -7,7 +7,6 @@
 {% assign content = '' %}
 
 {% if tags.size > 0 %}
-  [&nbsp;
   {% assign content = start_with %}
   {% for tag_slug in tags %}
     {% capture iter_separator %}{% if forloop.last %}{{ end_with }}{% else %}{{ separator }}{% endif %}{% endcapture %}
@@ -22,7 +21,6 @@
 
     {% assign content = content_temp %}
   {% endfor %}
-  &nbsp;]
 {% endif %}
 
 {{ content }}
