@@ -7,6 +7,7 @@
 {% assign content = '' %}
 
 {% if tags.size > 0 %}
+  [&nbsp;
   {% assign content = start_with %}
   {% for tag_slug in tags %}
     {% capture iter_separator %}{% if forloop.last %}{{ end_with }}{% else %}{{ separator }}{% endif %}{% endcapture %}
@@ -14,15 +15,14 @@
     {% assign tag = meta | where: "slug", tag_slug | first %}
 
     {% if tag %}                                                                  <!-- class="flip-title" -->
-      [&nbsp;
-      {% capture content_temp %}{{ content }}<a href="{{ tag.url | relative_url }}" class="highligher-rouge">{{ tag.title }}</a>{{ iter_separator }}{% endcapture %}
-      &nbsp;]
+      {% capture content_temp %}{{ content }}<a href="{{ tag.url | relative_url }}" class="no-underline">{{ tag.title }}</a>{{ iter_separator }}{% endcapture %}
     {% else %}
       {% capture content_temp %}{{ content }}<span>{{ tag_slug | capitalize }}</span>{{ iter_separator }}{% endcapture %}
     {% endif %}
 
     {% assign content = content_temp %}
   {% endfor %}
+  &nbsp;]
 {% endif %}
 
 {{ content }}
