@@ -10,7 +10,7 @@
         {{ post.title }}
       {% unless no_link_title %}</a>{% endunless %}
     </h1>
-    
+
     <p class="post-date heading">
       {% assign post_format = site.data.strings.date_formats.post | default:"%d %b %Y" %}
       <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date:post_format }}</time>
@@ -19,17 +19,9 @@
       {% assign category_separator = site.data.strings.category_separator | default:" / " %}
       {% assign tag_separator      = site.data.strings.tag_separator      | default:", "  %}
       {% include components/tag-list.html tags=post.categories meta=site.featured_categories start_with=category_start separator=category_separator %}
-      <!--{% include components/tag-list.html tags=post.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}-->
-      <br>
-      <span class="post-tags">
-        {% for tag in page.tags %}
-          {% capture tag_name %}{{ tag }}{% endcapture %}
-          &nbsp;
-          <a class="no-underline" href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code></a>    
-        {% endfor %}
-      </span>
+      {% include components/tag-list.html tags=post.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}
     </p>
-    
+
     {% assign alt = false %}
     {% unless hide_image %}{% if post.image %}
       <div class="img lead sixteen-nine">

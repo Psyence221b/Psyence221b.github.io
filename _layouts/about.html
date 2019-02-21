@@ -38,19 +38,6 @@ layout: base
     <h1 class="page-title">{{ page.title }}</h1>
     {% include components/message.html text=page.description hide=page.hide_description %}
   </header>
-  
+
   {{ content }}
 </article>
-
-<!--
-  <head>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-    //페이지가 로드되면 실행한다.
-    $(document).ready( function() {
-	    $("#remotecontents").load("https://psyence221b.github.io/online-cv/index.html");
-	    //~이렇게 한줄만 해주면 알아서 contents에 testContents.html파일을 넣어 준다.
-    });
-    </script>
-  </head>
--->
