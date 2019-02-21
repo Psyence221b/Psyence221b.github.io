@@ -1,9 +1,8 @@
 {% assign tags = site.tags | sort %}
 {% for tag in tags %}
  <span class="site-tag">
-    <a href="/tag-{{ tag | first | slugify }}/"
-        style="font-size: {{ tag | last | size  |  times: 4 | plus: 80  }}%" class="no-underline">
-            {{ tag[0] | replace:'-', ' ' }} ({{ tag | last | size }}) &nbsp;
+    <a href="/tag-{{ tag | first | slugify }}/" class="no-underline">
+            <code class="highligher-rouge">{{ tag[0] | replace:'-', ' ' }} ({{ tag | last | size }})</code>
     </a>
 <!--
     <a href="/tag-{{ tag | first | slugify }}/"
