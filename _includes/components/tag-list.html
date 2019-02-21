@@ -14,7 +14,9 @@
     {% assign tag = meta | where: "slug", tag_slug | first %}
 
     {% if tag %}                                                                  <!-- class="flip-title" -->
+      [&nbsp;
       {% capture content_temp %}{{ content }}<a href="{{ tag.url | relative_url }}" class="highligher-rouge">{{ tag.title }}</a>{{ iter_separator }}{% endcapture %}
+      &nbsp;]
     {% else %}
       {% capture content_temp %}{{ content }}<span>{{ tag_slug | capitalize }}</span>{{ iter_separator }}{% endcapture %}
     {% endif %}
