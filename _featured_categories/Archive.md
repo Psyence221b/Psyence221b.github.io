@@ -17,5 +17,3 @@ menu: true
 order: 10
 
 ---
-
-{% include components/tag-list-sub.html tags=site.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}
