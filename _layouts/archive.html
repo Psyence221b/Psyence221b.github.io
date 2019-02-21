@@ -2,7 +2,10 @@
 layout: base
 ---
 
+<!--
 {% assign posts = site.categories[page.slug] | default:site.tags[page.slug] | default:site.posts %}
+-->
+{% assign posts = site.tags %}
 
 {% if page.title.size > 0 %}
   <header>
@@ -12,10 +15,9 @@ layout: base
   <hr class="sr-only"/>
 {% endif %}
 
-<!-- Tag cloud
-{% include components/tag-list-sub.html tags=post.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}
- Tag cloud -->
-{% include components/tagcloud.html %}
+<!-- Tag cloud -->
+{% include components/tag-list-sub.html tags=posts.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}
+<!-- Tag cloud -->
 
 <!-- -->
 
