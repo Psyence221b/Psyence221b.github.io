@@ -12,9 +12,27 @@ layout: base
   <hr class="sr-only"/>
 {% endif %}
 
+<!-- Tag cloud -->
+{% capture temptags %}
+  {% for tag in site.tags %}
+    {{ tag[1].size | plus: 1000 }}#{{ tag[0] }}#{{ tag[1].size }}
+  {% endfor %}
+{% endcapture %}
 
+{% assign sortedtemptags = temptags | split:' ' | sort | reverse %}
+{% for temptag in sortedtemptags %}
+  {% assign tagitems = temptag | split: '#' %}
+  {% capture tagname %}{{ tagitems[1] }}{% endcapture %}
+  <a class="no-underline" href="/tag/{{ tagname }}"><code class="highligher-rouge"><nobr>{{ tagname }}</nobr></code></a>
+{% endfor %}
+
+<!--
 {% include components/tag-list-sub.html tags=site.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}
 
+
+
+
+ Tag cloud -->
 
 {{ content }}
 
