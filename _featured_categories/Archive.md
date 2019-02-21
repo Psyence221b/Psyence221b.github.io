@@ -1,6 +1,6 @@
 ---
 # Featured tags need to have the `list` layout.
-layout: archive
+layout: list
 
 # The title of the tag's page.
 title: Archive
@@ -17,3 +17,5 @@ menu: true
 order: 10
 
 ---
+
+{% include components/tag-list-sub.html tags=site.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}
