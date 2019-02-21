@@ -2,6 +2,7 @@
 layout: post
 categories: [workshop]
 tags: [test]
+comments: true
 title: Workshop Content II
 description: >
   A page showing how regular markdown content is styled in Hydejack.
