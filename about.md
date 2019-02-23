@@ -22,24 +22,3 @@ hide_description: false
 menu: true
 order: 1
 ---
-<!--
-  <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <style>
-      .iframe_00 {
-         display: inline-block;
-         border: none;
-         height: 200vh;
-         width: 2000;
-      }
-      </style>
-   </head>
--->
-<!--   
-    <iframe src="https://psyence221b.github.io/online-cv/index.html" class="iframe_00" marginwidth=0 marginheight=0>
-    </iframe>
--->
-    <div style="text-align:center">
-      <h4>Pdf viewer testing</h4>
-      <iframe src="https://docs.google.com/viewer?url=http://www.pdf995.com/samples/pdf.pdf&embedded=true" frameborder="0" height="500px" width="100%"></iframe>
-    </div>
