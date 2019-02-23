@@ -1,8 +1,3 @@
----
-layout: default
-page_title: Search
-permalink: /search/
----
 <div id="results">
   <h1><!-- `key` listing for `value` --></h1>
 
@@ -26,7 +21,7 @@ permalink: /search/
         searchInput: document.getElementById('search-input'),
         resultsContainer: document.getElementById('results-container'),
         json: '{{ site.baseurl }}/search2.json',
-        searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>',
+        searchResultTemplate: '<p><a href="{url}">{title}</a></p>',
         noResultsText: 'No results found',
         limit: 10,
         fuzzy: false,
