@@ -52,7 +52,7 @@ author:
 
 # This text will appear in a `<small>` tag in the footer of every page.
 copyright:             >
-  © 2018. All rights reserved.
+  © 2018. Psyence221b All rights reserved.
 
 # Add links to the footer.
 # Typically you'll want to link to your impress, cookies or privacy policy, etc.
@@ -132,7 +132,7 @@ collections:
 
 # Setting a disqus shortname will enable the comment section on
 # pages with `comments: true` in the front matter.
-  disqus:                psyence221b
+disqus:                psyence221b
 
 # Setting a tinyletter username will enable the newsletter subscription box.
 # PRO version only!
