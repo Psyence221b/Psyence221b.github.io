@@ -1,0 +1,150 @@
+% check_spectrum
+
+%% addaing path
+close all;
+% addpath /users/khc/code/02_tools/rspcacode-master/ -end
+% addpath /users/khc/code/02_tools/eeglab14_0_0b/ -end
+addpath D:\researches\toolboxes\rspcacode-master\ -end
+addpath D:\researches\toolboxes\eeglab14_0_0b\ -end
+eeglab
+
+%% global variables
+gp_names = {'exp','sham'}; Cgp_name = {'E','S'};
+% tg_eeg_path = '/users/khc/data/MYM/eeg';
+tg_eeg_path = 'Y:\data\MYM\eeg';
+
+%%
+aassize = 20; seg_val =500; sigp_val = 0.02;
+
+load('eegch.mat');
+
+% tg_ch_list = 1:31; sbj_list = 1:30;
+% winTR = 360;
+% fs = 250; wins = winTR*2; noverlap_wins = winTR; fpt = 2^10;
+%
+% for gpi=1:2
+%     tg_gp = gp_names{gpi};
+%     tg_Cgp = Cgp_name{gpi};
+%
+%     for runi=1:3,
+%         for sbj_idx=1:length(sbj_list)
+%             sbji = sbj_list(sbj_idx);
+%             sname = sprintf('rt_r%02d_%02dAAS_dwnc_ica.set',runi,aassize);
+%             fname = sprintf('%s/%s/S%02d%s/rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+%             EEG = pop_loadset('filename',sname,'filepath',fname);
+%
+%             for chi=1:31,
+%                 sig = EEG.data(chi,:);
+%
+%                 [S,F,T,P] = spectrogram((sig),wins,noverlap_wins,fpt,fs);
+%                 rt_sp_p(gpi,sbj_idx,runi,chi,:) = mean(abs(S).^2,2);
+%             end
+%
+%             sav_name = sprintf('rt_r%02d_%02dAAS_dwnc_rspca.set',runi,aassize);
+%             EEG = pop_loadset('filename',sav_name,'filepath',fname);
+%
+%             for chi=1:31,
+%                 sig = EEG.data(chi,:);
+%
+%                 [S,F,T,P] = spectrogram((sig),wins,noverlap_wins,fpt,fs);
+%                 rt_sp_p2(gpi,sbj_idx,runi,chi,:) = mean(abs(S).^2,2);
+%             end
+%         end
+%     end
+% end
+%
+% %% non rtfMRI
+%
+% tg_ch_list = 1:31; sbj_list = 1:30;
+%
+% for gpi=1:2
+%     tg_gp = gp_names{gpi};
+%     tg_Cgp = Cgp_name{gpi};
+%
+%     for runi=1:2
+%         for sbj_idx=1:length(sbj_list)
+%             sbji = sbj_list(sbj_idx);
+%             sname = sprintf('nrt_r%02d_%02dAAS_dwnc_ica.set',runi,aassize);
+%             fname = sprintf('%s/%s/S%02d%s/non_rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+%
+%             EEG = pop_loadset('filename',sname,'filepath',fname);
+%
+%             for chi=1:31,
+%                 sig = EEG.data(chi,:);
+%
+%                 [S,F,T,P] = spectrogram((sig),wins,noverlap_wins,fpt,fs);
+%                 nrt_sp_p(gpi,sbj_idx,runi,chi,:) = mean(abs(S).^2,2);
+%             end
+%
+%             sav_name = sprintf('nrt_r%02d_%02dAAS_dwnc_rspca.set',runi,aassize);
+%             EEG = pop_loadset('filename',sav_name,'filepath',fname);
+%
+%             for chi=1:31,
+%                 sig = EEG.data(chi,:);
+%
+%                 [S,F,T,P] = spectrogram((sig),wins,noverlap_wins,fpt,fs);
+%                 nrt_sp_p2(gpi,sbj_idx,runi,chi,:) = mean(abs(S).^2,2);
+%             end
+%
+%         end
+%     end
+%
+% end
+%
+% mrt_sp_p = squeeze(mean(rt_sp_p,4));  mrt_sp_p2 = squeeze(mean(rt_sp_p2,4));
+% mnrt_sp_p = squeeze(mean(nrt_sp_p,4)); mnrt_sp_p2 = squeeze(mean(nrt_sp_p2,4));
+
+mrt_sp_p = squeeze(mean(10*log10(rt_sp_p),4));  mrt_sp_p2 = squeeze(mean(10*log10(rt_sp_p2),4));
+mnrt_sp_p = squeeze(mean(10*log10(nrt_sp_p),4)); mnrt_sp_p2 = squeeze(mean(10*log10(nrt_sp_p2),4));
+
+gps = {'E','S'};
+for gpi=1:2,
+    figure(); cnt =1;
+    for sbi=1:30
+        for runi=1:3,
+            subplot(10,9,cnt);
+%             vec_p = 10*log10(squeeze(mrt_sp_p(gpi,sbi,runi,:)));
+%             vec_p2 = 10*log10(squeeze(mrt_sp_p2(gpi,sbi,runi,:)));
+            vec_p = (squeeze(mrt_sp_p(gpi,sbi,runi,:)));
+            vec_p2 = (squeeze(mrt_sp_p2(gpi,sbi,runi,:)));
+            plot(F,vec_p,'k'); hold on; plot(F,vec_p2,'r');
+            title(sprintf('S%02d%s-r%02d',sbi,gps{gpi},runi));
+            cnt = cnt+1;
+            xlim([0 125]);
+        end
+    end
+end
+
+
+gps = {'E','S'};
+for gpi=1:2,
+    figure(); cnt =1;
+    for sbi=1:30
+        for runi=1:2,
+            subplot(10,6,cnt);
+%             vec_p = 10*log10(squeeze(mrt_sp_p(gpi,sbi,runi,:)));
+%             vec_p2 = 10*log10(squeeze(mrt_sp_p2(gpi,sbi,runi,:)));
+            vec_p = (squeeze(mnrt_sp_p(gpi,sbi,runi,:)));
+            vec_p2 = (squeeze(mnrt_sp_p2(gpi,sbi,runi,:)));
+            plot(F,vec_p,'k'); hold on; plot(F,vec_p2,'r');
+            title(sprintf('S%02d%s-r%02d',sbi,gps{gpi},runi));
+            cnt = cnt+1;
+            xlim([0 125]);
+        end
+    end
+end
+
+
+% 
+% gpi=1; sbji=5; runi=3;
+% 
+% figure(); 
+% 
+% for chi=1:31,
+%     subplot(6,6,chi);
+%     vec_p = 10*log10(squeeze(rt_sp_p(gpi,sbi,runi,chi,:)));
+%     vec_p2 = 10*log10(squeeze(rt_sp_p2(gpi,sbi,runi,chi,:)));
+%     plot(F,vec_p,'k'); hold on; plot(F,vec_p2,'r');
+%     title(sprintf('S%02d%s-r%02d-CH%02d',sbi,gps{gpi},runi,chi));
+%     xlim([0 125]);
+% end
