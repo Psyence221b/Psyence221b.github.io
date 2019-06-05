@@ -1,0 +1,141 @@
+% ICA
+%% addaing path
+
+addpath /users/khc/code/02_tools/eeglab14_0_0b/ -end
+% addpath D:\researches\toolboxes\eeglab14_0_0b\ -end
+
+%% global variables,
+gp_names = {'exp','sham'}; Cgp_name = {'E','S'};
+
+% new_path = 'Y:\data\MYM\data_backup\';
+% sav_tg_eeg_path = 'Y:\data\MYM\eeg';
+
+sav_tg_eeg_path = '/users/khc/data/MYM/eeg';
+tg_eeg_path = sav_tg_eeg_path;
+
+org_smp_rate = 5000; dsmp = 250; % down-sampling rate; 
+TR = 1.440; aassize = 20;
+
+%% setting parameters
+[ALLEEG EEG CURRENTSET ALLCOM] = eeglab;
+
+%% data load across subjects
+
+for gpi=1
+
+    tg_gp = gp_names{gpi};
+    tg_Cgp = Cgp_name{gpi};
+        
+    for sbji=11:20 
+%         eval(sprintf('tg_sbj_info = %s_sbj_task_info;',tg_gp));
+%         tg_sbj_path = fullfile(new_tg_data{gpi,sbji},'eeg');
+%         
+        %% rt_EEG data
+        for runi=1:3
+            %% EEG data load
+            fname = sprintf('%s/%s/S%02d%s/rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+
+            sname = sprintf('rt_r%02d_%02dAAS_dwnc_rspca_obs.set',runi,aassize);
+%             EEG = pop_loadset( EEG, 'filename',sname,'filepath',fname);
+            EEG = pop_loadset('filename',sname,'filepath',fname);
+
+           %% OBS
+%             EEG=pop_fmrib_qrsdetect(EEG,32,'qrs','yes');
+%             EEG = eeg_checkset( EEG );
+%             EEG = pop_fmrib_pas(EEG,'qrs','obs',3);
+%             EEG = eeg_checkset( EEG );
+%             
+%             sname = sprintf('rt_r%02d_%02dAAS_dwnc_rspca_obs.set',runi,aassize);
+%             EEG = pop_saveset( EEG, 'filename',sname,'filepath',fname);
+            
+           %% ICA data
+            EEG = pop_runica(EEG, 'extended',0,'sphering','on','bias','on','interupt','on');
+            %       EEG = pop_runica(EEG, 'extended','on','sphering','on','bias','on','interupt','on');
+            [ALLEEG EEG] = eeg_store(ALLEEG, EEG, CURRENTSET);
+            EEG = eeg_checkset( EEG );
+            tmp = EEG;
+
+            sname = sprintf('rt_r%02d_%02dAAS_dwnc_rspca_obs_ica.set',runi,aassize);
+            EEG = pop_saveset( EEG, 'filename',sname,'filepath',fname);
+        end
+        
+        %% nrt_EEG data
+%         for runi=2,
+%             tg_series = tg_sbj_info(sbji,runi).nrt_series;
+%             dir_info = dir(sprintf('%s/eeg/*_s%d_*_*.vhdr',new_tg_data{gpi,sbji},tg_series(runi)));
+%             dir_info.folder = sprintf('%s/eeg',new_tg_data{gpi,sbji});
+%             EEG.etc.eeglabvers = '14.0.0'; % this tracks which version of EEGLAB is being used, you may ignore it
+%             EEG = pop_loadbv(dir_info.folder, dir_info.name, [], [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32]);
+%             EEG = eeg_checkset( EEG );
+%             
+%             %% EEG data load
+%             %             ndir = sprintf('%s\\%s\\S%02d%s\\non_rtfmri\\run%02d',sav_tg_eeg_path,tg_gp,sbji,Cgp_name{gpi},runi);
+%             ndir = sprintf('%s/%s/S%02d%s/non_rtfmri/run%02d',sav_tg_eeg_path,tg_gp,sbji,Cgp_name{gpi},runi);
+%             mkdir(ndir);
+%             %
+%             %% set spatial location
+%             EEG=pop_chanedit(EEG, 'lookup','/users/khc/code/02_tools/eeglab14_0_0b/plugins/dipfit2.2/standard_BESA/standard-10-5-cap385.elp');
+%             EEG = eeg_checkset( EEG );
+%             
+%             %% AAS run
+%             EEG = eeg_checkset( EEG );
+%             [ Peak_references ] = UseMarker( EEG, 'R128' );
+%             [channel] = DetectChannel( EEG );
+%             Artifact_onset = 0; Artifact_offset = TR*org_smp_rate;
+%             
+%             [ weighting_matrix ] = m_moving_average( length(Peak_references), aassize );
+%             [ EEG ] = BaselineCorrect( EEG, Peak_references, weighting_matrix, 1, Artifact_onset, Artifact_offset, 0, 0, 1 );
+%             EEG = CorrectionMatrix( EEG, weighting_matrix, Peak_references, Artifact_onset, Artifact_offset);
+%             
+%             %% save data point
+%             sname = sprintf('nrt_r%02d_%02dAAS.set',runi,aassize);
+%             EEG = pop_saveset(EEG,'filename',sname,'filepath',ndir);
+%             EEG = eeg_checkset( EEG );
+%             
+%             % Down_smapling & high-pass filter
+%             EEG = pop_resample(EEG,dsmp); % down sampling
+%             EEG = eeg_checkset(EEG);
+%             
+%             % save data point
+%             sname = sprintf('nrt_r%02d_%02dAAS_dwn.set',runi,aassize);
+%             EEG = pop_saveset( EEG, 'filename',sname,'filepath',ndir);
+%             
+%             for kk =1:length(EEG.event)
+%                 if strcmp(EEG.event(kk).type,'R128')
+%                     break;
+%                 end
+%             end
+%             st_point = EEG.event(kk).latency;
+%             
+%             EEG = eeg_eegrej( EEG, [1 st_point+dsmp*10]); % 10 secs remove
+%             
+%             for kk =length(EEG.event):-1:1
+%                 if strcmp(EEG.event(kk).type,'R128')
+%                     break;
+%                 end
+%             end
+%             
+%             enp = EEG.event(kk).latency;
+%             EEG = eeg_eegrej( EEG, [enp-dsmp*8.5600 EEG.pnts]); % 10 secs remove
+%             
+%             sname = sprintf('nrt_r%02d_%02dAAS_dwnc.set',runi,aassize);
+%             EEG = pop_saveset( EEG, 'filename',sname,'filepath',ndir);
+%             
+%             %             EEG.data = zscore(EEG.data,0,2);
+%             %                     EEG = pop_saveset( EEG, 'filename',sname,'filepath',ndir);
+%             EEG = pop_select( EEG,'channel',{'Fp1' 'Fp2' 'F3' 'F4' 'C3' 'C4' 'P3' 'P4' 'O1' 'O2' 'F7' 'F8' 'T7' 'T8' 'P7' 'P8' 'Fz' 'Cz' 'Pz' 'Oz' 'FC1' 'FC2' 'CP1' 'CP2' 'FC5' 'FC6' 'CP5' 'CP6' 'TP9' 'TP10' 'POz'});
+%             
+%             %% ICA data
+%             EEG = pop_runica(EEG, 'extended',1,'sphering','on','bias','on','interupt','on');
+%             %       EEG = pop_runica(EEG, 'extended','on','sphering','on','bias','on','interupt','on');
+%             [ALLEEG EEG] = eeg_store(ALLEEG, EEG, CURRENTSET);
+%             EEG = eeg_checkset( EEG );
+%             tmp = EEG;
+%             
+%             sname = sprintf('nrt_r%02d_%02dAAS_dwnc_ica.set',runi,aassize);
+%             EEG = pop_saveset( EEG, 'filename',sname,'filepath',ndir);
+%             
+%         end
+    end
+end
+
