@@ -1,0 +1,66 @@
+check_ICs_rm_artifact
+
+addpath /users/khc/code/02_tools/eeglab14_0_0b/ -end
+% addpath D:\researches\toolboxes\eeglab14_0_0b\ -end
+
+%% global variables,
+gp_names = {'exp','sham'}; Cgp_name = {'E','S'};
+tg_eeg_path = '/users/khc/data/MYM/eeg';
+% tg_eeg_path = 'Y:\data\MYM\eeg';
+
+eeglab
+% \exp\S01E\rtfmri\run01
+%
+aassize = 20;
+
+for gpi=1
+    tg_gp = gp_names{gpi};
+    tg_Cgp = Cgp_name{gpi};
+    
+    for sbji=1,
+        
+        for runi=2:3
+            sname = sprintf('rt_r%02d_%02dAAS_dwnc_ica.set',runi,aassize);
+            fname = sprintf('%s/%s/S%02d%s/rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+            EEG = pop_loadset('filename',sname,'filepath',fname);
+            EEG = eeg_checkset( EEG );
+            
+            fnc_eegica_rst(EEG,[1:31]);
+            
+            ica_ids = input('Which ICs you want to remove?:','s');
+            fname_txt = sprintf('%s/%s/S%02d%s/rtfmri/run%02d/ICs_history.txt',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+            fid = fopen(fname_txt,'wt');
+            fprintf(fid,'%s',ica_ids);
+            fclose(fid);
+            
+            EEG = pop_subcomp( EEG, str2num(ica_ids), 0);
+            
+            sname = sprintf('rt_r%02d_%02dAAS_dwnc_icarm.set',runi,aassize);
+            EEG = pop_saveset( EEG, 'filename',sname,'filepath',fname);
+            
+        end
+        
+        for runi=1:2,
+            sname = sprintf('nrt_r%02d_%02dAAS_dwnc_ica.set',runi,aassize);
+            fname = sprintf('%s/%s/S%02d%s/non_rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+            
+            EEG = pop_loadset('filename',sname,'filepath',fname);
+            EEG = eeg_checkset( EEG );
+            
+            %fnc_eegica_rst(EEG,[1:31]);
+            fnc_eegica_rst(EEG,[1:31],1.4400);
+            
+            ica_ids = input('Which ICs you want to remove?:','s');
+            fname_txt = sprintf('%s/%s/S%02d%s/non_rtfmri/run%02d/ICs_history.txt',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+            fid = fopen(fname_txt,'wt');
+            fprintf(fid,'%s',ica_ids);
+            fclose(fid);
+            
+            EEG = pop_subcomp( EEG, str2num(ica_ids), 0);
+            
+            sname = sprintf('nrt_r%02d_%02dAAS_dwnc_icarm.set',runi,aassize);
+            EEG = pop_saveset( EEG, 'filename',sname,'filepath',ndir);
+        end
+
+    end
+end
