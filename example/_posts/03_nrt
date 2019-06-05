@@ -1,0 +1,59 @@
+% rspca_nrt
+
+%% addaing path
+
+addpath /users/khc/code/02_tools/rspcacode-master/ -end
+addpath /users/khc/code/02_tools/eeglab14_0_0b/ -end
+% addpath D:\researches\toolboxes\rspcacode-master\ -end
+% addpath D:\researches\toolboxes\eeglab14_0_0b\ -end
+eeglab
+
+%% global variables
+gp_names = {'exp','sham'}; Cgp_name = {'E','S'};
+tg_eeg_path = '/users/khc/data/MYM/eeg';
+% tg_eeg_path = 'Y:\data\MYM\eeg';
+
+%%
+aassize = 20;
+
+seg_val =500; sigp_val = 0.02;
+
+for gpi=1:2
+    tg_gp = gp_names{gpi};
+    tg_Cgp = Cgp_name{gpi};
+    
+    if gpi==1,    
+        sbj_list = [4 21]; runi=1;
+    elseif gpi==2, 
+        sbj_list = [8 10]; 
+    end
+    
+%     tg_ch_list = [1:5]; 
+%     tg_ch_list = [6:10]; 
+%     tg_ch_list = [11:15]; 
+%     tg_ch_list = [16:20]; 
+%     tg_ch_list = [21:25]; 
+    tg_ch_list = [26:31]; 
+
+    
+    for sbj_idx=1:length(sbj_list)
+        sbji = sbj_list(sbj_idx);
+        
+        if gpi==2 & sbji==8
+            runi = 2;
+        elseif gpi==2 & sbji==10
+            runi = 3;
+        end
+        
+        sname = sprintf('rt_r%02d_%02dAAS_dwnc_ica.set',runi,aassize);
+        fname = sprintf('%s/%s/S%02d%s/rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+        EEG = pop_loadset('filename',sname,'filepath',fname);
+        
+        outdir = fullfile(fname,'rspca_noica');
+        
+        for ii=1:length(tg_ch_list)
+            tgch = tg_ch_list(ii);
+            main_rspca(EEG,outdir,tgch,seg_val,sigp_val,0);
+        end
+    end
+end
