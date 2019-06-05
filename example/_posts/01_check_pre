@@ -1,0 +1,48 @@
+gp_names = {'exp','sham'}; Cgp_name = {'E','S'};
+% new_path = '/users/khc/data/MYM/data_backup/';
+tg_eeg_path = 'Y:\data\MYM\eeg';
+
+tg_sav_eeg_path = 'G:\MYM\eeg';
+
+% 
+%%
+aassize = 20;
+
+for gpi=1:2
+    tg_gp = gp_names{gpi};
+    tg_Cgp = Cgp_name{gpi};
+    
+    for sbji=1:30,
+        
+        for runi=1:3,
+            sname = sprintf('rt_r%02d_%02dAAS_dwnc_ica.set',runi,aassize);
+            fname = sprintf('%s/%s/S%02d%s/rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi,sname);
+            sav_dir = sprintf('%s/%s/S%02d%s/rtfmri/run%02d',tg_sav_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+
+            mkdir(sav_dir);
+            copyfile(fname,sav_dir);
+            
+            sname = sprintf('rt_r%02d_%02dAAS_dwnc_ica.fdt',runi,aassize);
+            fname = sprintf('%s/%s/S%02d%s/rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi,sname);
+            copyfile(fname,sav_dir);
+
+
+        end
+        
+        for runi=1:2,
+            sname = sprintf('nrt_r%02d_%02dAAS_dwnc_ica.set',runi,aassize);
+            fname = sprintf('%s/%s/S%02d%s/non_rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi,sname);
+            sav_dir = sprintf('%s/%s/S%02d%s/non_rtfmri/run%02d',tg_sav_eeg_path,tg_gp,sbji,tg_Cgp,runi);
+            mkdir(sav_dir);
+            copyfile(fname,sav_dir);
+            
+            sname = sprintf('nrt_r%02d_%02dAAS_dwnc_ica.fdt',runi,aassize);
+            fname = sprintf('%s/%s/S%02d%s/non_rtfmri/run%02d/%s',tg_eeg_path,tg_gp,sbji,tg_Cgp,runi,sname);
+            copyfile(fname,sav_dir);
+            
+        end
+        
+        
+        
+    end
+end
